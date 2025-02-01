@@ -13,6 +13,10 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as RadpostauthLogsImport } from './routes/radpostauth-logs'
+import { Route as RadcheckLogsImport } from './routes/radcheck-logs'
+import { Route as RadacctLogsImport } from './routes/radacct-logs'
+import { Route as CreateNewUserImport } from './routes/create-new-user'
 
 // Create Virtual Routes
 
@@ -26,6 +30,30 @@ const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+
+const RadpostauthLogsRoute = RadpostauthLogsImport.update({
+  id: '/radpostauth-logs',
+  path: '/radpostauth-logs',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const RadcheckLogsRoute = RadcheckLogsImport.update({
+  id: '/radcheck-logs',
+  path: '/radcheck-logs',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const RadacctLogsRoute = RadacctLogsImport.update({
+  id: '/radacct-logs',
+  path: '/radacct-logs',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CreateNewUserRoute = CreateNewUserImport.update({
+  id: '/create-new-user',
+  path: '/create-new-user',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
@@ -44,6 +72,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/create-new-user': {
+      id: '/create-new-user'
+      path: '/create-new-user'
+      fullPath: '/create-new-user'
+      preLoaderRoute: typeof CreateNewUserImport
+      parentRoute: typeof rootRoute
+    }
+    '/radacct-logs': {
+      id: '/radacct-logs'
+      path: '/radacct-logs'
+      fullPath: '/radacct-logs'
+      preLoaderRoute: typeof RadacctLogsImport
+      parentRoute: typeof rootRoute
+    }
+    '/radcheck-logs': {
+      id: '/radcheck-logs'
+      path: '/radcheck-logs'
+      fullPath: '/radcheck-logs'
+      preLoaderRoute: typeof RadcheckLogsImport
+      parentRoute: typeof rootRoute
+    }
+    '/radpostauth-logs': {
+      id: '/radpostauth-logs'
+      path: '/radpostauth-logs'
+      fullPath: '/radpostauth-logs'
+      preLoaderRoute: typeof RadpostauthLogsImport
+      parentRoute: typeof rootRoute
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -58,36 +114,75 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
+  '/create-new-user': typeof CreateNewUserRoute
+  '/radacct-logs': typeof RadacctLogsRoute
+  '/radcheck-logs': typeof RadcheckLogsRoute
+  '/radpostauth-logs': typeof RadpostauthLogsRoute
   '/about': typeof AboutLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
+  '/create-new-user': typeof CreateNewUserRoute
+  '/radacct-logs': typeof RadacctLogsRoute
+  '/radcheck-logs': typeof RadcheckLogsRoute
+  '/radpostauth-logs': typeof RadpostauthLogsRoute
   '/about': typeof AboutLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
+  '/create-new-user': typeof CreateNewUserRoute
+  '/radacct-logs': typeof RadacctLogsRoute
+  '/radcheck-logs': typeof RadcheckLogsRoute
+  '/radpostauth-logs': typeof RadpostauthLogsRoute
   '/about': typeof AboutLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths:
+    | '/'
+    | '/create-new-user'
+    | '/radacct-logs'
+    | '/radcheck-logs'
+    | '/radpostauth-logs'
+    | '/about'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to:
+    | '/'
+    | '/create-new-user'
+    | '/radacct-logs'
+    | '/radcheck-logs'
+    | '/radpostauth-logs'
+    | '/about'
+  id:
+    | '__root__'
+    | '/'
+    | '/create-new-user'
+    | '/radacct-logs'
+    | '/radcheck-logs'
+    | '/radpostauth-logs'
+    | '/about'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
+  CreateNewUserRoute: typeof CreateNewUserRoute
+  RadacctLogsRoute: typeof RadacctLogsRoute
+  RadcheckLogsRoute: typeof RadcheckLogsRoute
+  RadpostauthLogsRoute: typeof RadpostauthLogsRoute
   AboutLazyRoute: typeof AboutLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  CreateNewUserRoute: CreateNewUserRoute,
+  RadacctLogsRoute: RadacctLogsRoute,
+  RadcheckLogsRoute: RadcheckLogsRoute,
+  RadpostauthLogsRoute: RadpostauthLogsRoute,
   AboutLazyRoute: AboutLazyRoute,
 }
 
@@ -104,11 +199,27 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/create-new-user",
+        "/radacct-logs",
+        "/radcheck-logs",
+        "/radpostauth-logs",
         "/about"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/create-new-user": {
+      "filePath": "create-new-user.tsx"
+    },
+    "/radacct-logs": {
+      "filePath": "radacct-logs.tsx"
+    },
+    "/radcheck-logs": {
+      "filePath": "radcheck-logs.tsx"
+    },
+    "/radpostauth-logs": {
+      "filePath": "radpostauth-logs.tsx"
     },
     "/about": {
       "filePath": "about.lazy.tsx"
