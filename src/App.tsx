@@ -1,4 +1,4 @@
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@heroui/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@heroui/react";
 // Import the generated route tree
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
@@ -7,12 +7,14 @@ const router = createRouter({ routeTree })
 import './App.css'
 import { useState } from "react";
 
-const API_URL = 'http://192.168.1.10:3000'
+const API_URL = import.meta.env.VITE_API_URL
 const REMOVE_ALL_USERS_URL = `${API_URL}/clean`
 
 
 function App() {
   const [resetButton, setResetButton] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const cancelAction = () => {
     setResetButton(false)
   }
@@ -24,11 +26,38 @@ function App() {
     fetch(REMOVE_ALL_USERS_URL).then(res => console.info("everything got well", { res })).catch(err => console.error('Something got wrong', { err }))
   }
 
+  const menuItems = [
+    { label: 'Radius Accounts', url: '/radacct-logs' },
+    { label: 'Radius Check', url: '/radcheck-logs' },
+    { label: 'Radius Post Auth', url: '/radpostauth-logs' },
+    { label: 'Create new user', url: '/create-new-user' }
+  ];
+
   return (
     <>
-      <Navbar>
+      <Navbar onMenuOpenChange={setIsMenuOpen}>
+        <NavbarContent>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden"
+          />
+        </NavbarContent>
+        <NavbarMenu>
+          {menuItems.map((item) => (
+            <NavbarMenuItem key={item.label}>
+              <Link
+                className="w-full"
+                color="foreground"
+                href={item.url}
+                size="lg"
+              >
+                {item.label}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
         <NavbarBrand>
-          <p className="font-bold text-inherit">Billar Client Network</p>
+          <p className="font-bold text-inherit">Client Network</p>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarItem>
@@ -52,7 +81,7 @@ function App() {
             </Link>
           </NavbarItem>
         </NavbarContent>
-        <NavbarContent justify="end">
+        <NavbarContent className="hidden sm:flex gap-4" justify="end">
           <NavbarItem>
             {resetButton ?
               <>
@@ -65,7 +94,7 @@ function App() {
               </>
               : <>
                 <Button color="primary" href="#" variant="flat" onClick={triggerResetAccounts}>
-                  Try to RESET Acconts
+                  Try to RESET Accounts
                 </Button>
               </>}
           </NavbarItem>
