@@ -1,3 +1,4 @@
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 
@@ -7,7 +8,7 @@ export const Route = createFileRoute('/radcheck-logs')({
 
 // move this to an env file
 // API_URL might change, we need to ask to the server through ip route
-const API_URL = 'http://192.168.1.10:3000'
+const API_URL = import.meta.env.VITE_API_URL
 const CONNECTED_USERS_URL = `${API_URL}/get-radcheck`
 
 function ConnectedList() {
@@ -29,8 +30,15 @@ function ConnectedList() {
   }
 
   return (
-    <section>
-      <div className="p-2">Print users here</div>
-    </section>
+    <Table isStriped className='mt-5'>
+      <TableHeader>
+        <TableColumn>NAME</TableColumn>
+      </TableHeader>
+      <TableBody>
+        {users.map(user => <TableRow key={user.id}>
+          <TableCell>{user.username}</TableCell>
+        </TableRow>)}
+      </TableBody>
+    </Table>
   )
 }

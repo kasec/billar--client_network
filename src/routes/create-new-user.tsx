@@ -8,7 +8,7 @@ export const Route = createFileRoute('/create-new-user')({
 
 // move this to an env file
 // API_URL might change, we need to ask to the server through ip route
-const API_URL = 'http://192.168.1.10:3000'
+const API_URL = import.meta.env.VITE_API_URL
 const CREATE_USER_URL = `${API_URL}/create-user`
 
 function CreateNewUser() {
@@ -34,9 +34,6 @@ function CreateNewUser() {
     .then(resp => console.log(resp))
     .catch(err => console.error("Something went wrong", err))
   };
-
-  
-
 
   return (
     <Form
