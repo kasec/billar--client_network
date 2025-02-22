@@ -47,7 +47,7 @@ function App() {
             <NavbarMenuItem key={item.label}>
               <Link
                 className="w-full"
-                color="foreground"
+                color="foreground" underline="always"
                 href={item.url}
                 size="lg"
               >
@@ -61,22 +61,22 @@ function App() {
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarItem>
-            <Link color="foreground" href="/radacct-logs">
+            <Link color="foreground" underline="always" href="/radacct-logs">
               Radius Accounts
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="/radcheck-logs">
+            <Link color="foreground" underline="always" href="/radcheck-logs">
               Radius Check
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="/radpostauth-logs">
+            <Link color="foreground" underline="always" href="/radpostauth-logs">
               Radius Post Auth
             </Link>
           </NavbarItem>
           <NavbarItem isActive>
-            <Link color="foreground" href="/create-new-user">
+            <Link color="foreground" underline="always" href="/create-new-user">
               Create new user
             </Link>
           </NavbarItem>
@@ -100,7 +100,7 @@ function App() {
           </NavbarItem>
         </NavbarContent>
       </Navbar>
-      <section>
+      <section className="flex justify-center">
         <RouterProvider router={router} />
       </section>
     </>
