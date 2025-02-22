@@ -31,6 +31,6 @@ I fixed ui:
 [sat feb 22nd 2025]
 
 - [ ] show `isActive` prop when url matches with navbar button
-- [ ] Add remove button to each row in radius check page
+- [ ] Add remove button to each row in radius check page do this arriving to town, because I need to check if billar admin devices could be set to use the same account & test user_ accounts only can be used by one device.
 
 I don't think I need account record right now, I need to remove account one by one though and remove logs by myself each saturday if needed. I removed reset data button, cause is too dangerous, the only button to delete is on radius check view.
