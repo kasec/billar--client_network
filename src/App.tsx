@@ -81,24 +81,6 @@ function App() {
             </Link>
           </NavbarItem>
         </NavbarContent>
-        <NavbarContent className="hidden sm:flex gap-4" justify="end">
-          <NavbarItem>
-            {resetButton ?
-              <>
-                <Button color="default" href="#" variant="flat" onClick={cancelAction}>
-                  Cancel Action
-                </Button>
-                <Button color="danger" href="#" variant="flat" onClick={resetAccounts}>
-                  Reset Accont
-                </Button>
-              </>
-              : <>
-                <Button color="primary" href="#" variant="flat" onClick={triggerResetAccounts}>
-                  Try to RESET Accounts
-                </Button>
-              </>}
-          </NavbarItem>
-        </NavbarContent>
       </Navbar>
       <section className="flex justify-center">
         <RouterProvider router={router} />
